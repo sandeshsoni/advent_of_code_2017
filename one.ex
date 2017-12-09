@@ -1,5 +1,6 @@
 defmodule One do
 
+  # Iteration two, try Stream.cycle
   def calculate(input) do
     list = circular_digits_list(input)
     list -- Enum.dedup(list)
