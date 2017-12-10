@@ -2,8 +2,7 @@ defmodule Two do
 
 
   def calculate do
-    read_input_from_file
-    |> convert into number
+    # |> convert into number
 
     # f
     # |> String.split("\n")
@@ -11,6 +10,12 @@ defmodule Two do
     # |> Enum.map(fn(ele) -> String.to_integer(ele) end) end
     # |> Enum.map fn(x) -> Enum.min_max(x) end
 
+    read_input_from_file
+    |>String.trim
+    |> String.split("\n")
+    |> Enum.map(fn (str) -> String.split(str, "\t")
+    |> Enum.map(fn(x) -> String.to_integer(x); end) end)
+    |> Enum.reduce 0, fn(list, acc) -> {min, max} = Enum.min_max list; (max - min) +acc end
   end
 
   # read input from file
