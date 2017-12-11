@@ -37,6 +37,7 @@ defmodule Two do
     fn(list, acc) -> result_of_evenly_divisible_pair(list) + acc end
   end
 
+  # Thank you @crowdhailer for quick suggestion
   defp evenly_divisible_pair list do
     (for i <- list, j <- list, do: {i, j})
     |> Enum.find(fn ({i, j}) -> i != j and (rem(i, j) == 0 or rem(j, i) == 0)
@@ -49,9 +50,6 @@ defmodule Two do
       true -> div(n1, n2)
       false -> div(n2, n1)
     end
-  end
-
-  def calculate_two do
   end
 
   # read input from file
