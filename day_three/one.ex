@@ -35,6 +35,9 @@ defmodule One do
     # 9 -> 1, -1
     # 10 -> 2, -1
 
+    # 1024
+    #
+
 
     # get square root of number.
     # its coordinates are {odd_no, -odd_no}
@@ -65,6 +68,16 @@ defmodule One do
     # now calculate distance
     # iterate till, keep subtracting distance and changing coordinates
 
+    # ! direct distance not possible as direction is spiral
+    # get axis and coordinate and distance is |x| + |y|
+
+
+    # xxxxx
+    # sq = :math.sqrt(44) |> round
+    # rem = sq * sq - 44
+    # Integer.mod(rem, div(sq,2))
+    # sum
+    # incorrect. maybe coordinates
 
     {5, 6}
   end
