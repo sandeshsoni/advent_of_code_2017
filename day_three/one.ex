@@ -3,14 +3,15 @@ defmodule One do
 
   # @doc
   # ```
-  # 64  63  62  61  60  59  58  57
-  # 37  36  35  34  33  32  31  56
-  # 38  17  16  15  14  13  30  55
-  # 39  18   5   4   3  12  29  54
-  # 40  19   6   1   2  11  28  53
-  # 41  20   7   8   9  10  27  52
-  # 42  21  22  23  24  25  26  51
-  # 43  44  45  46  47  48  49  50
+  # 65  64  63  62  61  60  59  58  57
+  # 66  37  36  35  34  33  32  31  56
+  # 67  38  17  16  15  14  13  30  55
+  # 68  39  18   5   4   3  12  29  54
+  # 69  40  19   6 **1** 2  11  28  53
+  # 70  41  20   7   8   9  10  27  52
+  # 71  42  21  22  23  24  25  26  51
+  # 72  43  44  45  46  47  48  49  50
+  # 73  74  75  76  77  78  79  80  81
   # ```
 
   def solve do
@@ -24,34 +25,7 @@ defmodule One do
   end
 
   defp calculate_coordinates_of(number) do
-    # 1 -> 0,0
-    # 2 -> 1, 0
-    # 3 -> 1, 1
-    # 4 -> 0, 1
-    # 5 -> -1, 1
-    # 6 -> -1, 0
-    # 7 -> -1, -1
-    # 8 -> 0, -1
-    # 9 -> 1, -1
-    # 10 -> 2, -1
-
-    # 1024
-    #
-
-
-    # get square root of number.
-    # its coordinates are {odd_no, -odd_no}
-    # keep subtracting and updating coordinates till the remainder becomes zero
-
-    # erlang math lib
-    # get closest odd_number bottomRight boundry
-
     ceil_odd = &if(Integer.is_odd(&1), do: &1, else: &1 + 1)
-
-    # ceil_odd = fn(num) ->
-    #   if Integer.is_odd(num), do: num, else: num + 1
-    # end
-    # fun = &if(Integer.is_odd(&1), do: "odd", else: "even")
 
     big_numb = number
     |> :math.sqrt
@@ -59,33 +33,30 @@ defmodule One do
     |> round
     |> ceil_odd.()
 
-    IO.puts "Bottom right: #{ big_numb }"
+    distance_to_travel = big_numb*big_numb - number
+    diameter = big_numb - 1
+    radius   = div(diameter, 2)
+    diff = Integer.mod(distance_to_travel, diameter)
 
-    distance = big_numb*big_numb - number
+    IO.puts "Bottom right: #{ big_numb } :: #{}"
+    IO.puts "distance : #{ distance_to_travel }"
+    IO.puts "diameter : #{ diameter }"
+    IO.puts "difference : #{ diff }"
 
-    IO.puts "distance : #{ distance }"
+    pos = diameter - diff
+    pos2 = radius - diff
 
-    # now calculate distance
-    # iterate till, keep subtracting distance and changing coordinates
+    case div(distance_to_travel, diameter) do
+      1 -> { pos2, radius }
+      2 -> {- radius, pos2}
+      3 -> {pos2, radius}
+      4 -> {radius, pos2}
+      _ -> {radius, radius}
+    end
 
-    # ! direct distance not possible as direction is spiral
-    # get axis and coordinate and distance is |x| + |y|
+    # TODO
+    # FIX the correction above
 
-
-    # xxxxx
-    # sq = :math.sqrt(44) |> round
-    # rem = sq * sq - 44
-    # Integer.mod(rem, div(sq,2))
-    # sum
-    # incorrect. maybe coordinates
-
-    {5, 6}
-  end
-
-  defp iterate_to_num({x,y}, big_numb, input_numb, diameter) do
-    # 4 cases
-    # bottom, right, top, left.
-    # lies is any of above, or any corners
   end
 
 end
