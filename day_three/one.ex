@@ -14,10 +14,13 @@ defmodule One do
   # 73  74  75  76  77  78  79  80  81
   # ```
 
-  def solve do
+  def solve(input) do
     # INPUT = 361527
 
-   IO.inspect locate_position(15)
+    input
+    |> locate_position
+    |> nearest_distance_from_center
+
   end
 
   def locate_position(number) do
@@ -38,10 +41,10 @@ defmodule One do
     radius   = div(diameter, 2)
     diff = Integer.mod(distance_to_travel, diameter)
 
-    IO.puts "Bottom right: #{ big_numb } :: #{}"
-    IO.puts "distance : #{ distance_to_travel }"
-    IO.puts "diameter : #{ diameter }"
-    IO.puts "difference : #{ diff }"
+    # IO.puts "Bottom right: #{ big_numb } :: #{}"
+    # IO.puts "distance : #{ distance_to_travel }"
+    # IO.puts "diameter : #{ diameter }"
+    # IO.puts "difference : #{ diff }"
 
     pos = diameter - diff
     pos2 = radius - diff
@@ -53,10 +56,11 @@ defmodule One do
       4 -> {radius, pos2}
       _ -> {radius, radius}
     end
+  end
 
-    # TODO
-    # FIX the correction above
-
+  def nearest_distance_from_center({x,y}) do
+    mod_of = &if(&1 > 0, do: &1, else: -1 * &1)
+    mod_of.(x) + mod_of.(y)
   end
 
 end
